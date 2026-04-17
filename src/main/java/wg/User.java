@@ -1,20 +1,19 @@
 package main.java.wg;
 
-public class User {
-    String name;
+public class User extends Person {
     String email;
 
     public User(String name, String email){
-        this.name = name;
+        super(name);
         this.email = email;
 
     }
 
+    public String getEmail(){
+        return  email;
+    }
     public void displayInfo(){
-        System.out.println("User: " + name +  " | Email: " + email);
+        System.out.println("User: " + getName() +  " | Email: " + email);
     }
 
-    public void sayHello(){
-        System.out.println("Bonjour, je suis  " + name + ".");
-    }
 }
