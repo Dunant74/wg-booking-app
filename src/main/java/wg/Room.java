@@ -1,6 +1,6 @@
 package main.java.wg;
 
-public class Room {
+public class Room implements Displayable {
     private String name;
     private int capacity;
 
@@ -27,6 +27,7 @@ public class Room {
         return numberOfPeople <= capacity;
     }
 
+    @Override
     public void displayInfo() {
         System.out.println("Room: " + name + " | Capacity: " + capacity);
     }
