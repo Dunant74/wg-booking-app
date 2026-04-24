@@ -1,6 +1,7 @@
 package wg;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.*;
@@ -65,6 +66,59 @@ public class BookingManager {
         }
 
         return users;
+    }
+
+    public void addUserToDB(User user) {
+        String query = "INSERT INTO users (name, email) VALUES (?, ?)";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, user.getName());
+            pstmt.setString(2, user.getEmail());
+
+            pstmt.executeUpdate();
+
+            System.out.println("User ajouté en DB !");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateUserEmail(String oldEmail, String newEmail) {
+        String sql = "UPDATE users SET email = ? WHERE email = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, newEmail);
+            pstmt.setString(2, oldEmail);
+
+            int rowsUpdated = pstmt.executeUpdate();
+
+            System.out.println(rowsUpdated + " user updated.");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteUserByEmail(String email) {
+        String sql = "DELETE FROM users WHERE email = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, email);
+
+            int rowsDeleted = pstmt.executeUpdate();
+
+            System.out.println(rowsDeleted + " user deleted.");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

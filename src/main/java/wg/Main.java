@@ -54,10 +54,10 @@ public class Main {
 
             List<User> usersFromDB = manager.getAllUsersFromDB();
 
+
             for (User u : usersFromDB) {
                 u.displayInfo();
             }
-
         }
 
 }
