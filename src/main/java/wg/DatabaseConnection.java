@@ -10,7 +10,8 @@ public class DatabaseConnection {
     private static final String USER = "postgres";
     private static final String PASSWORD = "team17";
 
-    public static Connection getConnection() throws SQLException {
+    public static Connection getConnection() throws Exception {
+        Class.forName("org.postgresql.Driver");
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 }
