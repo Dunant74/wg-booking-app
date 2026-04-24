@@ -1,5 +1,6 @@
 package wg;
 
+import java.sql.Connection;
 import java.util.*;
 
 
@@ -7,6 +8,16 @@ import java.util.*;
 public class Main {
 
         public static void main(String[] args) {
+
+
+            try {
+                Connection connection = DatabaseConnection.getConnection();
+                System.out.println("Connexion PostgreSQL réussie !");
+                connection.close();
+            } catch (Exception e) {
+                System.out.println("Erreur de connexion PostgreSQL");
+                e.printStackTrace();
+            }
 
             BookingManager manager = new BookingManager();
 
